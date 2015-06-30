@@ -30805,14 +30805,23 @@ var apiReader = angular.module('apiReader', [require('angular-ui-router')]);
 
 apiReader.config(require('./routing.js'));
 
-},{"./routing.js":5,"angular":3,"angular-ui-router":1}],5:[function(require,module,exports){
+apiReader.controller('HomeController', require('./controller/HomeController.js'));
+
+},{"./controller/HomeController.js":5,"./routing.js":6,"angular":3,"angular-ui-router":1}],5:[function(require,module,exports){
+HomeController = function($scope) {
+
+};
+
+module.exports = ['$scope', HomeController];
+
+},{}],6:[function(require,module,exports){
 Routing = function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");
 
     $stateProvider
         .state('home', {
             url: "/home",
-            templateUrl: "partials/home.html",
+            templateUrl: "web/partial/home.html",
             controller: 'HomeController'
         })
 
