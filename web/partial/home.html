@@ -1,1 +1,17 @@
-Hello
+<div ng-repeat="movie in movies">
+
+    <h2>{{ movie.title }}</h2>
+
+    <img ng-src="{{ 'http://image.tmdb.org/t/p/w185' + movie.poster_path }}" alt=""/>
+
+    <p>{{ movie.overview }}</p>
+
+    <a ui-sref="details({id: movie.id })">
+        Voir le detail !
+    </a>
+
+    <hr/>
+
+</div>
+
+
