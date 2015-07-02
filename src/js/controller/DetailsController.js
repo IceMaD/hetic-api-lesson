@@ -1,9 +1,9 @@
-HomeController = function($scope, $http) {
+DetailsController = function($scope, $http, $stateParams) {
 
-    $http.get('http://api.themoviedb.org/3/discover/movie?api_key='+API_KEY)
 
+    $http.get('http://api.themoviedb.org/3/movie/'+ $stateParams.id +'?api_key='+API_KEY)
         .success(function(data, status, headers, config) {
-            $scope.movies = data.results;
+            $scope.movie = data;
             console.log(data);
             // this callback will be called asynchronously
             // when the response is available
@@ -15,4 +15,4 @@ HomeController = function($scope, $http) {
 
 };
 
-module.exports = ['$scope', '$http', HomeController];
+module.exports = ['$scope', '$http', '$stateParams', DetailsController];

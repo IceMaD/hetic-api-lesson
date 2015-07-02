@@ -7,6 +7,11 @@ Routing = function($stateProvider, $urlRouterProvider) {
             templateUrl: "web/partial/home.html",
             controller: 'HomeController'
         })
+        .state('details', {
+            url: "/details/:id",
+            templateUrl: "web/partial/details.html",
+            controller: 'DetailsController'
+        })
 
 };
 

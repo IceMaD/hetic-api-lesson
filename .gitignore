@@ -80,3 +80,6 @@ crashlytics-build.properties
 ### Sass template
 .sass-cache
 *.css.map
+
+src/css/style.min.css
+web/assets/style.min.css

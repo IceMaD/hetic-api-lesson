@@ -30801,20 +30801,56 @@ module.exports = angular;
 },{"./angular":2}],4:[function(require,module,exports){
 var angular = require('angular');
 
+API_KEY = 'bcf6ff211b659eb30e136e7df58d2bca';
+
 var apiReader = angular.module('apiReader', [require('angular-ui-router')]);
 
 apiReader.config(require('./routing.js'));
 
 apiReader.controller('HomeController', require('./controller/HomeController.js'));
+apiReader.controller('DetailsController', require('./controller/DetailsController.js'));
 
-},{"./controller/HomeController.js":5,"./routing.js":6,"angular":3,"angular-ui-router":1}],5:[function(require,module,exports){
-HomeController = function($scope) {
+},{"./controller/DetailsController.js":5,"./controller/HomeController.js":6,"./routing.js":7,"angular":3,"angular-ui-router":1}],5:[function(require,module,exports){
+DetailsController = function($scope, $http, $stateParams) {
+
+
+    $http.get('http://api.themoviedb.org/3/movie/'+ $stateParams.id +'?api_key='+API_KEY)
+        .success(function(data, status, headers, config) {
+            $scope.movie = data;
+            console.log(data);
+            // this callback will be called asynchronously
+            // when the response is available
+        }).
+        error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
 
 };
 
-module.exports = ['$scope', HomeController];
+module.exports = ['$scope', '$http', '$stateParams', DetailsController];
 
 },{}],6:[function(require,module,exports){
+HomeController = function($scope, $http) {
+
+    $http.get('http://api.themoviedb.org/3/discover/movie?api_key='+API_KEY)
+
+        .success(function(data, status, headers, config) {
+            $scope.movies = data.results;
+            console.log(data);
+            // this callback will be called asynchronously
+            // when the response is available
+        }).
+        error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+};
+
+module.exports = ['$scope', '$http', HomeController];
+
+},{}],7:[function(require,module,exports){
 Routing = function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/home");
 
@@ -30823,6 +30859,11 @@ Routing = function($stateProvider, $urlRouterProvider) {
             url: "/home",
             templateUrl: "web/partial/home.html",
             controller: 'HomeController'
+        })
+        .state('details', {
+            url: "/details/:id",
+            templateUrl: "web/partial/details.html",
+            controller: 'DetailsController'
         })
 
 };
