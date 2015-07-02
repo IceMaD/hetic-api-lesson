@@ -1,0 +1,19 @@
+<a ui-sref="home">Accueil</a>
+
+<h1>
+    {{ movie.title }}
+</h1>
+
+<img style="height: 500px;" ng-src="{{ 'http://image.tmdb.org/t/p/w1920' + movie.poster_path }}" alt=""/>
+
+<p>
+    {{ movie.overview }}
+</p>
+
+<p>
+    {{ movie.release_date | date }}
+</p>
+
+<hr/>
+
+<a target="_blank" ng-href="{{ movie.homepage }}">Voir le site officiel</a>
